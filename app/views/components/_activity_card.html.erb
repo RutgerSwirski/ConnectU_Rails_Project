@@ -1,0 +1,28 @@
+<div class="row">
+  <% @activities.each do |activity| %>
+    <div class="col-sm-4 default-card">
+      <%= link_to activity_path(activity) do %>
+        <div class="default-card-image" style="background-image: url('<%= activity.activity_photos.first.photo %>');">
+        </div>
+        <div class="default-card-content">
+          <h3><%= activity.name %></h3>
+          <p>
+            <%= activity.address %>
+            <br>
+            <%= humanized_money_with_symbol(activity.price) %> per person
+          </p>
+          <p>
+            <% if Review.where(activity: activity).count == 0 %>
+              <p>No Reviews Yet</p>
+            <% else %>
+              <% Review.where(activity: activity).average(:rating).to_i.times do %>
+                <i class="fas fa-star"></i>
+              <% end %> <%= activity.reviews.count %>
+            <% end %>
+          </p>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+

@@ -1,0 +1,16 @@
+<div class="container">
+<h3>New Flat</h3>
+  <%= simple_form_for @flat do |f| %>
+    <%= f.simple_fields_for :flat_photos do |p| %>
+      <%= p.input :photo, label: "Images", as: :file, input_html: { multiple: true } %>
+      <%= p.input :photo_cache, as: :hidden %>
+    <% end %>
+    <%= f.input :name %>
+    <%= f.input :description %>
+    <%= f.input :price, label: 'Price Per Day' %>
+    <%= f.input :address, input_html: { id: 'address_input' } %>
+    <%= f.button :submit %>
+  <% end %>
+</div>
+
+

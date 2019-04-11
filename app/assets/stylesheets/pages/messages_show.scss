@@ -1,0 +1,52 @@
+.show-messages {
+	padding: 20px;
+}
+
+.show-recieved-message {
+	background: #98FB98;
+	position: relative;
+	padding: 20px 20px;
+ 	margin: 20px 0 20px 0;
+	border-radius: 10px;
+}
+
+.show-recieved-message:after {
+	content: '';
+	position: absolute;
+	display: block;
+	top: 50%;
+	right: 100%;
+	margin-top: -10px;
+	width: 0;
+	height: 0;
+	width: 0;
+	height: 0;
+	border-top: 10px solid transparent;
+	border-bottom: 10px solid transparent;
+	border-right: 10px solid #98FB98;
+}
+
+.show-sent-message {
+	text-align: left;
+	background: #C2DFFF;
+	position: relative;
+	padding: 20px 20px;
+ 	margin: 20px 0 20px 0;
+	border-radius: 10px;
+}
+.show-sent-message:after {
+	transform: rotate(180deg);
+	content: '';
+	position: absolute;
+	display: block;
+	top: 50%;
+	left: 100%;
+	margin-top: -10px;
+	width: 0;
+	height: 0;
+	width: 0;
+	height: 0;
+	border-top: 10px solid transparent;
+	border-bottom: 10px solid transparent;
+	border-right: 10px solid #C2DFFF;
+}

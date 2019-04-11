@@ -1,0 +1,83 @@
+<div class="container order-container">
+  <div class="row">
+    <% @orders.each do |order| %>
+      <% if order.trip_id != nil %>
+        <div class="col-sm-4 default-card">
+          <%= link_to order_path(order) do %>
+            <div class="default-card-image" style="background-image: url('<%= order.trip.trip_photos.first.photo %>');">
+            </div>
+            <div class="default-card-content">
+              <h3><%= order.trip.name %></h3>
+              <h4>Tickets: <%= order.number_of_orders %></h4>
+              <p><%= order.trip.destination %></p>
+              <p><%= order.trip.date_arriving.strftime("%d-%m-%y") %> - <%= order.trip.date_leaving.strftime("%d-%m-%y") %></p>
+              <p>
+                <% if Review.where(trip: order.trip).count == 0 %>
+                  <p>No Reviews Yet</p>
+                <% else %>
+                  <% Review.where(trip: order.trip).average(:rating).to_i.times do %>
+                    <i class="fas fa-star"></i>
+                  <% end %> <%= order.trip.reviews.count %>
+                <% end %>
+              </p>
+            </div>
+          <% end %>
+          <div class="card-tickets">
+            <% if order.trip.current_funding_amount_cents >= order.trip.funding_total_cents %>
+              <p><%= pluralize order.tickets.where(ticket_used: false).count, "Ticket" %> Available!</p>
+            <% else %>
+              <p>Trip Not Fully Funded!</p>
+            <% end %>
+          </div>
+        </div>
+      <% elsif order.activity_id != nil %>
+        <div class="col-sm-4 default-card">
+          <%= link_to order_path(order) do %>
+            <div class="default-card-image" style="background-image: url('<%= order.activity.activity_photos.first.photo %>');">
+            </div>
+            <div class="default-card-content">
+              <h3><%= order.activity.name %></h3>
+              <h4>Tickets: <%= order.number_of_orders %></h4>
+              <p><%= order.activity.address %></p>
+              <p><%= order.activity.date.strftime("%d-%m-%y") %></p>
+              <p>
+                <% if Review.where(activity: order.activity).count == 0 %>
+                  <p>No Reviews Yet</p>
+                <% else %>
+                  <% Review.where(activity: order.activity).average(:rating).to_i.times do %>
+                    <i class="fas fa-star"></i>
+                  <% end %> <%= order.activity.reviews.count %>
+                <% end %>
+              </p>
+            </div>
+          <% end %>
+          <div class="card-tickets">
+            <p><%= pluralize order.tickets.where(ticket_used: false).count, "Ticket" %> Available!</p>
+          </div>
+        </div>
+      <% elsif order.flat_id != nil %>
+        <div class="col-sm-4 default-card">
+          <%= link_to order_path(order) do %>
+            <div class="default-card-image" style="background-image: url('<%= order.flat.flat_photos.first.photo %>');">
+            </div>
+            <div class="default-card-content">
+              <h3><%= order.flat.name %></h3>
+              <h4>Guests: <%= order.number_of_guests %></h4>
+              <p><%= order.flat.address %></p>
+              <p><%= order.flat_booked_start.strftime("%d-%m-%y") %> until <%= order.flat_booked_end.strftime("%d-%m-%y") %></p>
+              <p>
+                <% if Review.where(flat: order.flat).count == 0 %>
+                  <p>No Reviews Yet</p>
+                <% else %>
+                  <% Review.where(flat: order.flat).average(:rating).to_i.times do %>
+                    <i class="fas fa-star"></i>
+                  <% end %> <%= order.flat.reviews.count %>
+                <% end %>
+              </p>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

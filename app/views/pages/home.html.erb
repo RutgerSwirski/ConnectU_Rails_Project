@@ -1,2 +1,29 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<%= render 'components/banner' %>
+<div class="container home-container">
+  <div class="col-sm-12">
+    <h2>Trips Leaving Soon</h2>
+    <hr>
+    <% if @trips.blank? %>
+      <h4>Nothing Found!</h4>
+    <% else %>
+      <%= render 'components/trip_card' %>
+    <% end %>
+    <hr>
+    <h2>Our Favourite Flats</h2>
+    <hr>
+    <% if @flats.blank? %>
+      <h4>Nothing Found!</h4>
+    <% else %>
+      <%= render 'components/flat_card' %>
+    <% end %>
+    <hr>
+    <h2>Activities Happening Soon</h2>
+    <hr>
+    <% if @activities.blank? %>
+      <h4>Nothing Found!</h4>
+    <% else %>
+      <%= render 'components/activity_card' %>
+    <% end %>
+  </div>
+</div>
+

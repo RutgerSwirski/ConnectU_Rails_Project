@@ -1,0 +1,32 @@
+<div class="container order-container">
+  <div class="row">
+  	<div class="col-sm-12 order-complete">
+  	  <p><i class="far fa-check-circle"></i> Order Complete!</p>
+  	  <hr>
+  	</div>
+    <div class="col-sm-5 order-image" style="background-image: url('<%= @order.trip.trip_photos.first.photo %>');">
+    </div>
+    <div class="col-sm-7 order-info">
+      <h1><%= @order.trip.destination %> <small>departing from <%= @order.trip.departing_from %></small> </h1>
+      <hr>
+      <h4>From <%= @order.trip.date_arriving.strftime("%d-%m-%y") %> until <%= @order.trip.date_leaving.strftime("%d-%m-%y") %></h4>
+      <p><%= @order.trip.description %></p>
+      <hr>
+      <h5>Number Of Tickets: <%= @order.number_of_orders %></h5>
+      <hr>
+      <h3>Amount: <%= humanized_money_with_symbol(@order.number_of_orders * @order.amount) %></h3>
+      <hr>
+      <% if @order.trip.current_funding_amount_cents >= @order.trip.funding_total_cents %>
+        <% @order.tickets.each do |ticket| %>
+          <% if ticket.ticket_used == false %>
+            <%= link_to "View Ticket", ticket_path(ticket), class: 'btn btn-primary' %>
+          <% else %>
+            <button class="btn btn-primary" disabled>View Ticket</button>
+          <% end %>
+        <% end %>
+      <% else %>
+        <p>Trip Not Fully Funded!</p>
+      <% end %>
+    </div>
+  </div>
+</div>

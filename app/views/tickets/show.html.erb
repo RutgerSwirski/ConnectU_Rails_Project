@@ -1,0 +1,15 @@
+<div class="container">
+	<div class="col-sm-6 offset-sm-3">
+		<div class="qr-code" style="border: 1px solid black; height: 200px;">
+			QR CODE
+		</div>
+	</div>
+	<div class="qr-used">
+	  <% if @ticket.ticket_used == false %>
+	    <p>Ticket Not Used</p>
+	    <%= link_to "Use QR Code", ticket_path(@ticket), method: :patch %>
+	  <% else %>
+	    <p>Ticket Used!</p>
+	  <% end %>
+	</div>
+</div>

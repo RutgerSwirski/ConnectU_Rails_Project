@@ -1,0 +1,10 @@
+<div class="container my-hosted-container">
+	<h3>Trips Hosted By <%= current_user.first_name %></h3>
+	<%= render 'components/trip_card' %>
+	<hr>
+	<h3>Homes Hosted By <%= current_user.first_name %></h3>
+	<%= render 'components/flat_card' %>
+	<hr>
+	<h3>Activities Hosted By <%= current_user.first_name %></h3>
+	<%= render 'components/activity_card' %>
+</div>

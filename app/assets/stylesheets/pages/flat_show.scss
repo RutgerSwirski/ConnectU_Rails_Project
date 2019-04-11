@@ -1,0 +1,43 @@
+.flat-container {
+  margin-top: 20px;
+}
+
+.flat-hosted-by {
+  text-align: center;
+  margin-bottom: 10px;
+  a {
+    color: black;
+    text-decoration: none;
+  }
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.edit-flat {
+  padding: 20px;
+  text-align: center;
+}
+
+.flat-info {
+  padding: 20px;
+}
+
+.flat-book {
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+}
+
+.flat-amenities {
+  padding: 20px;
+}
+
+.flat-location {
+  padding: 20px;
+}
+
+.flat-reviews {
+  padding: 20px;
+}

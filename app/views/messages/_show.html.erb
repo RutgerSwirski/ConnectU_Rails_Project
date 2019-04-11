@@ -1,0 +1,18 @@
+<div class="row">
+	<div class="col-sm-6 show-messages">
+		<% @recieved_messages.each do |message| %>
+			<div class="show-recieved-message">
+				<p><%= message.content %></p>
+				<%= message.created_at.strftime("%d-%m-%y @ %H:%M") %>
+			</div>
+		<% end %>
+	</div>
+	<div class="col-sm-6 show-messages">
+		<% @sent_messages.each do |message| %>
+			<div class="show-sent-message">
+				<p><%= message.content %></p>
+				<%= message.created_at.strftime("%d-%m-%y @ %H:%M") %>
+			</div>
+		<% end %>
+	</div>
+</div>

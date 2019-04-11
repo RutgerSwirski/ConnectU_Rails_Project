@@ -1,0 +1,47 @@
+.profile-card-container {
+	padding: 10px;
+	a {
+		text-decoration: none;
+		color: black;
+	}
+}
+
+.profile-card {
+	padding: 20px;
+	border-radius:5px;
+	transition: all 1s;
+	&:hover {
+		transition: all 1s;
+		opacity: 0.7;
+	}
+}
+
+.profile-card-image {
+	margin: auto;
+	height: 100px;
+	width: 100px;
+	background-size: cover;
+	border-radius: 50%;
+}
+
+.profile-card-content {
+	margin-top: 15px;
+	h3 {
+		text-align:center;
+	}
+	h5 {
+		text-align:center;
+	}
+	li {
+		font-size: 20px;
+		list-style: none;
+		display: inline;
+		margin: 5px;
+	}
+}
+
+
+
+.friend-status {
+	text-align: center;
+}

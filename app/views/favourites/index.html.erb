@@ -1,0 +1,74 @@
+<div class="container">
+	<h1>My Favourites</h1>
+	<hr>
+	<div class="row">
+		<% @favourites.each do |favourite| %>
+			<% if favourite.trip_id != nil %>
+				<div class="col-sm-4 default-card">
+					<%= link_to trip_path(favourite.trip) do %>
+			            <div class="default-card-image" style="background-image: url('<%= favourite.trip.trip_photos.first.photo %>');">
+			            </div>
+			            <div class="default-card-content">
+			              <h3><%= favourite.trip.name %></h3>
+			              <p><%= favourite.trip.destination %></p>
+			              <p><%= favourite.trip.date_arriving.strftime("%d-%m-%y") %> - <%= favourite.trip.date_leaving.strftime("%d-%m-%y") %></p>
+			              <p>
+			                <% if Review.where(trip: favourite.trip).count == 0 %>
+			                  <p>No Reviews Yet</p>
+			                <% else %>
+			                  <% Review.where(trip: favourite.trip).average(:rating).to_i.times do %>
+			                    <i class="fas fa-star"></i>
+			                  <% end %> <%= favourite.trip.reviews.count %>
+			                <% end %>
+			              </p>
+			            </div>
+			        <% end %>
+		          	<%= link_to "Remove", favourite_path(favourite), method: :delete, class: 'btn btn-danger' %>
+			    </div>
+			<% elsif favourite.activity_id != nil %>
+				<div class="col-sm-4 default-card">
+					<%= link_to activity_path(favourite.activity) do %>
+						<div class="default-card-image" style="background-image: url('<%= favourite.activity.activity_photos.first.photo %>');">
+						</div>
+						<div class="default-card-content">
+						  <h3><%= favourite.activity.name %></h3>
+						  <p><%= favourite.activity.address %></p>
+						  <p><%= favourite.activity.date.strftime("%d-%m-%y") %></p>
+						  <p>
+						    <% if Review.where(activity: favourite.activity).count == 0 %>
+						      <p>No Reviews Yet</p>
+						    <% else %>
+						      <% Review.where(activity: favourite.activity).average(:rating).to_i.times do %>
+						        <i class="fas fa-star"></i>
+						      <% end %> <%= favourite.activity.reviews.count %>
+						    <% end %>
+						  </p>
+						</div>
+					<% end %>
+					<%= link_to "Remove", favourite_path(favourite), method: :delete, class: 'btn btn-danger' %>
+				</div>
+			<% elsif favourite.flat_id != nil %>
+				<div class="col-sm-4 default-card">
+		          <%= link_to flat_path(favourite.flat) do %>
+		            <div class="default-card-image" style="background-image: url('<%= favourite.flat.flat_photos.first.photo %>');">
+		            </div>
+		            <div class="default-card-content">
+		              <h3><%= favourite.flat.name %></h3>
+		              <p><%= favourite.flat.address %></p>
+		              <p>
+		                <% if Review.where(flat: favourite.flat).count == 0 %>
+		                  <p>No Reviews Yet</p>
+		                <% else %>
+		                  <% Review.where(flat: favourite.flat).average(:rating).to_i.times do %>
+		                    <i class="fas fa-star"></i>
+		                  <% end %> <%= favourite.flat.reviews.count %>
+		                <% end %>
+		              </p>
+		            </div>
+		          <% end %>
+		          <%= link_to "Remove", favourite_path(favourite), method: :delete, class: 'btn btn-danger' %>
+		        </div>
+			<% end %>
+		<% end %>
+	</div>
+</div>

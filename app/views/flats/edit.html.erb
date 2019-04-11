@@ -1,0 +1,20 @@
+<div class="container">
+<h3>Edit <%= @flat.name %></h3>
+  <% @flat.flat_photos.where.not(id: nil).each do |photo| %>
+    <li data-flat_photo-id="<%= photo.id %>" style="list-style: none">
+      <%= cl_image_tag photo.photo, height: 100, crop: :fill %>
+      <%= link_to "Delete Image", flat_photo_path(photo), method: :delete, remote: true  %>
+    </li>
+  <% end %>
+  <%= simple_form_for @flat do |f| %>
+    <%= f.simple_fields_for :flat_photos do |p| %>
+      <%= p.input :photo, label: "Images", as: :file, input_html: { multiple: true } %>
+      <%= p.input :photo_cache, as: :hidden %>
+    <% end %>
+    <%= f.input :name %>
+    <%= f.input :description %>
+    <%= f.input :price, label: 'Price Per Day' %>
+    <%= f.input :address, input_html: { id: 'address_input' }  %>
+    <%= f.button :submit %>
+  <% end %>
+</div>

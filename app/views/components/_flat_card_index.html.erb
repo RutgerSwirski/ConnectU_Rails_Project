@@ -1,0 +1,26 @@
+<% @flats.each do |flat| %>
+  <div class="col-sm-6 default-card">
+    <%= link_to flat_path(flat) do %>
+      <div class="default-card-image" style="background-image: url('<%= flat.flat_photos.first.photo %>');">
+      </div>
+      <div class="default-card-content">
+        <h3><%= flat.name %></h3>
+        <p>
+          <%= flat.address %>
+          <br>
+          <%= humanized_money_with_symbol(flat.price) %> per night
+        </p>
+        <p>
+          <% if Review.where(flat: flat).count == 0 %>
+            <p>No Reviews Yet</p>
+          <% else %>
+            <% Review.where(flat: flat).average(:rating).to_i.times do %>
+              <i class="fas fa-star"></i>
+            <% end %> <%= flat.reviews.count %>
+          <% end %>
+        </p>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+

@@ -1,0 +1,84 @@
+<div class="col-sm-12">
+  <% @activity.activity_photos.each do |photo| %>
+    <%= cl_image_tag photo.photo, height: 300, crop: :fill %>
+  <% end %>
+</div>
+
+
+<div class="container activity-container">
+  <div class="row">
+    <div class="col-sm-8 activity-info">
+      <h1><%= @activity.name %></h1>
+      <hr>
+      <h3><%= @activity.date.strftime("%d-%m-%y") %> | <%= @activity.address %></h3>
+      <hr>
+      <p><%= @activity.description %></p>
+    </div>
+    <div class="col-sm-4">
+      <div class="add-to-favourites">     
+        <% if @favourites.include?(@activity) %>
+          <i class="fas fa-check"></i>
+          <h5>Added to Favourites</h5>
+        <% else %>
+          <%= link_to activity_favourites_path(@activity), method: :post do %>
+            <i class="fas fa-heart"></i>
+            <h5>Add to Favourites</h5>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="activity-hosted-by">
+        <%= link_to profile_path(@activity.user) do %>
+          <h5><%= cl_image_tag @activity.user.profile_picture, height: 60, crop: :fill, style: 'border-radius:50px;' %> Hosted By <%= @activity.user.first_name %></h5>
+        <% end %>
+      </div>
+      <div class="activity-book">
+        <% if @activity.date > Date.today %>
+          <h2>Price: <%= humanized_money_with_symbol(@activity.price) %></h2>
+          <h4>Available Tickets: <%= @activity.available_tickets %></h4>
+          <hr>
+          <% if @activity.available_tickets > 0 %>
+            <%= form_tag orders_path do %>
+              <%= simple_fields_for :orders do |p| %>
+                <%= p.input :number_of_orders, as: :integer, label: 'Quantity:'   %>
+              <% end %>
+              <%= hidden_field_tag 'activity_id', @activity.id %>
+              <%= submit_tag 'Book', class: 'btn btn-primary' %>
+            <% end %>
+          <% else %>
+            <h3>Sold Out!</h3>
+          <% end %>
+        <% else %>
+          <h2>Activity Ended!</h2>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class=" col-sm-12 activity-location">
+      <h3>Location</h3>
+      <hr>
+      <div
+        id="map"
+        class="show-map"
+        data-markers="<%= @markers.to_json %>"
+        data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
+      ></div>
+  </div>
+
+  <div class="col-sm-8 activity-reviews">
+    <hr>
+    <h2><%= pluralize @activity.reviews.size, "review" %></h2>
+
+    <div id="reviews">
+      <% if @activity.reviews.blank? %>
+        Be the first to leave a review for <%= @activity.name %>
+      <% else %>
+        <% @activity.reviews.each do |review| %>
+          <%= render 'reviews/show', review: review %>
+        <% end %>
+      <% end %>
+    </div>
+    <%= render 'reviews/activity_form', activity: @activity, review: @review %>
+  </div>
+
+</div>

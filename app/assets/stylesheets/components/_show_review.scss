@@ -1,0 +1,21 @@
+.review-user {
+  a {
+    color: black;
+    text-decoration: none;
+  }
+  &:hover {
+    opacity: 0.7;
+  }
+  img {
+    float:left;
+    margin-right: 15px;
+  }
+  p {
+    padding-top: 5px;
+  }
+
+}
+
+.review_content {
+  padding: 10px;
+}

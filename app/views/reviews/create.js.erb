@@ -1,0 +1,35 @@
+function refreshForm(innerHTML) {
+  const newReviewForm = document.getElementById('new_review');
+  newReviewForm.innerHTML = innerHTML;
+}
+
+function addReview(reviewHTML) {
+  const reviews = document.getElementById('reviews');
+  reviews.insertAdjacentHTML('beforeend', reviewHTML);
+}
+
+
+<% if params[:trip_id] != nil %>
+  <% if @review.errors.any? %>
+    refreshForm('<%= j render "reviews/trip_form", trip: @trip, review: @review %>');
+  <% else %>
+    addReview('<%= j render "reviews/show", review: @review %>');
+    refreshForm('<%= j render "reviews/trip_form", trip: @trip, review: Review.new %>');
+  <% end %>
+<% elsif params[:activity_id] != nil %>
+  <% if @review.errors.any? %>
+    refreshForm('<%= j render "reviews/activity_form", trip: @trip, review: @review %>');
+  <% else %>
+    addReview('<%= j render "reviews/show", review: @review %>');
+    refreshForm('<%= j render "reviews/activity_form", activity: @activity, review: Review.new %>');
+  <% end %>
+<% elsif params[:flat_id] != nil %>
+  <% if @review.errors.any? %>
+    refreshForm('<%= j render "reviews/flat_form", flat: @flat, review: @review %>');
+  <% else %>
+    addReview('<%= j render "reviews/show", review: @review %>');
+    refreshForm('<%= j render "reviews/flat_form", flat: @flat, review: Review.new %>');
+  <% end %>
+<% end %>
+
+

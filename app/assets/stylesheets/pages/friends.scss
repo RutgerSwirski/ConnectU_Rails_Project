@@ -1,0 +1,40 @@
+.all-friends {
+	padding: 20px;
+	a {
+		text-decoration: none;
+		color: black;
+	}
+}
+
+.friend {
+	padding: 10px;
+	transition: all 1s;
+	&:hover {
+		transition: all 1s;
+		margin-left: 30px;
+	}
+}
+
+.friend-profile-picture {
+	text-align: center;
+}
+
+.friend-content {
+}
+
+.sent-requests {
+	padding: 20px;
+	a {
+		text-decoration: none;
+		color: black;
+	}
+
+}
+
+.recieved-requests {
+	padding: 20px;
+	a {
+		text-decoration: none;
+		color: black;
+	}
+}

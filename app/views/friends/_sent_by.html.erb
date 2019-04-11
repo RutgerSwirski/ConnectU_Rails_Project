@@ -1,0 +1,17 @@
+<% @recieved_request_friends.each do |sent_by| %>
+	<%= link_to profile_path(sent_by.sender) do %>
+		<div class="col-sm-12 friend">
+			<div class="row">
+				<div class="col-sm-2 friend-profile-picture">
+					<%= cl_image_tag sent_by.sender.profile_picture, height: 100, crop: :fill, style: 'border-radius:50%;' %>
+				</div>
+				<div class="col-sm-8 friend-content">
+					<h4><%= sent_by.sender.first_name %> <%= sent_by.sender.last_name %></h4>
+					<hr>
+					<p><%= sent_by.sender.description[0..100] %>..</p>
+				</div>
+			</div>
+		</div>
+	<% end %>
+	<hr>
+<% end %>

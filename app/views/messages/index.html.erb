@@ -1,0 +1,21 @@
+<div class="container">
+	<h2>All Messages</h2>
+	<div class="all-conversations">
+		<% @messages.each do |message| %>
+			<%= link_to profile_path(message.sender) do %>
+				<div class="col-sm-12 conversation">
+					<div class="row">
+						<div class="col-sm-2 conversation-profile-picture">
+							<%= cl_image_tag message.sender.profile_picture, height: 100, crop: :fill, style: 'border-radius:50%;' %>
+						</div>
+						<div class="col-sm-10 conversation-content">
+							<h4><%= message.sender.first_name %> <%= message.sender.last_name %></h4>
+							<hr>
+							<p><%= message.sender.sent_messages.where(recipient: current_user).last.content %></p>
+						</div>
+					</div>
+				</div>
+			<% end %>
+		<% end %>
+	</div>
+</div>

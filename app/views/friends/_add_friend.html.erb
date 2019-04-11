@@ -1,0 +1,7 @@
+<% if @recieved_requests_ids.include?(user.id) || @sent_requests_ids.include?(user.id) %>
+	<h5>Pending Friend Request</h5>
+<% elsif @accepted_recieved_requests_ids.include?(user.id) || @accepted_sent_requests_ids.include?(user.id) %>
+	<h5>You Are Friends</h5>
+<% elsif current_user != user %>
+	<%= link_to "Add Friend", profile_friends_path(user), class: 'btn btn-primary', method: :post %>
+<% end %>

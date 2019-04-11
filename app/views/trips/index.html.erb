@@ -1,0 +1,32 @@
+<div class="col-sm-8 offset-sm-2 searchbar">
+  <%= form_tag trips_path, method: :get, class: 'form-inline' do %>
+    <%= text_field_tag :departing_from, params[:departing_from], placeholder: 'Departing From' %>
+    <%= text_field_tag :destination, params[:destination], placeholder: 'Destination'  %>
+    <%= select_tag :price, options_for_select(["Sort Price", "Price ASC", "Price DESC"], params[:price]) %>
+    <%= submit_tag "Search", class: "btn btn-primary" %>
+  <% end %>
+</div>
+
+<div class="col-sm-12">
+  <div class="row">
+    <div class="col-sm-6">
+      <% if @trips.blank? %>
+        <h3>Nothing Found!</h3>
+      <% else %>
+        <div class="row">
+          <%= render 'components/trip_card_index' %>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-sm-6">
+      <div
+        id="map"
+        class="index-map"
+        data-markers="<%= @markers.to_json %>"
+        data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
+      ></div>
+    </div>
+  </div>
+</div>
+
+

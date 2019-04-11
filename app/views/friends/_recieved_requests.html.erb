@@ -1,0 +1,19 @@
+<% current_user.recieved_friend_requests.where(status: 'pending').each do |request| %>
+	<%= link_to profile_path(request.sender) do %>
+		<div class="col-sm-12 friend">
+			<div class="row">
+				<div class="col-sm-2 friend-profile-picture">
+					<%= cl_image_tag request.sender.profile_picture, height: 100, crop: :fill, style: 'border-radius:50%;' %>
+				</div>
+				<div class="col-sm-8 friend-content">
+					<h4><%= request.sender.first_name %> <%= request.sender.last_name %></h4>
+					<hr>
+					<p><%= request.sender.description[0..100] %>..</p>
+					<%= link_to "Accept Friend", friend_path(request), method: :patch, class: 'btn btn-primary'  %>
+					<%= link_to "Decline Request", friend_path(request), method: :delete, class: 'btn btn-danger' %>
+				</div>
+			</div>
+		</div>
+	<% end %>
+	<hr>
+<% end %>

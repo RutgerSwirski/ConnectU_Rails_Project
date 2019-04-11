@@ -1,0 +1,36 @@
+<div class="row">
+  <% @trips.each do |trip| %>
+    <div class="col-sm-4 default-card">
+      <%= link_to trip_path(trip) do %>
+        <div class="default-card-image" style="background-image: url('<%= trip.trip_photos.first.photo %>');">
+          <div class="trip-percent">
+            <div class="c100 p<%= (((trip.current_funding_amount).to_f / (trip.funding_total).to_f) * 100).round %> small">
+              <span><%= (((trip.current_funding_amount).to_f / (trip.funding_total).to_f) * 100).round %>%</span>
+                <div class="slice">
+                    <div class="bar"></div>
+                    <div class="fill"></div>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="default-card-content">
+          <h3><%= trip.name %></h3>
+          <p>
+            <%= trip.destination %>
+            <br>
+            <%= humanized_money_with_symbol(trip.ticket_price) %> per person
+          </p>
+          <p>
+            <% if Review.where(trip: trip).count == 0 %>
+              <p>No Reviews Yet</p>
+            <% else %>
+              <% Review.where(trip: trip).average(:rating).to_i.times do %>
+                <i class="fas fa-star"></i>
+              <% end %> <%= trip.reviews.count %>
+            <% end %>
+          </p>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

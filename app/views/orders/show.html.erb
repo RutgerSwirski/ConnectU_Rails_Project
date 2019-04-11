@@ -1,0 +1,8 @@
+<% if @order.trip_id != nil %>
+  <%= render 'components/trip_order' %>
+<% elsif @order.activity_id != nil %>
+  <%= render 'components/activity_order' %>
+<% elsif @order.flat_id != nil %>
+  <%= render 'components/flat_order' %>
+<% end %>
+

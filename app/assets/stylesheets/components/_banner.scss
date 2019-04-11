@@ -1,0 +1,53 @@
+.banner {
+  color: white;
+  text-align: center;
+  height: calc(100vh - 70px);
+}
+
+.banner-cards {
+  height: 100%;
+}
+
+.banner-card {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover !important;
+  transition: all 1s;
+  &:hover {
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    transition: all 1s;
+  }
+  a {
+    text-decoration: none;
+    color:white;
+    transition: all 1s;
+    &:hover {
+      opacity: 0.7;
+      transition: all 1s;
+    }
+  }
+}
+
+.banner-home-card {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner-home-card-content {
+  h1 {
+    font-size: 60px;
+  }
+}
+
+.banner-card-content {
+  border-radius: 10px;
+  h3 {
+    padding: 10px 30px;
+  }
+}
+
+

@@ -1,0 +1,44 @@
+.trip-container {
+  margin-top: 20px;
+}
+
+.trip-hosted-by {
+  text-align: center;
+  margin-bottom: 10px;
+  a {
+    color: black;
+    text-decoration: none;
+  }
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.trip-info {
+  padding: 20px;
+}
+
+.edit-trip {
+  padding: 20px;
+  text-align: center;
+}
+
+.trip-pledge {
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+}
+
+.trip-pledge-info {
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+  border-radius: 10px;
+  margin: 30px 0;
+  padding: 30px;
+  text-align: center;
+  padding: 20px;
+}
+
+.trip-reviews {
+  padding: 20px;
+}

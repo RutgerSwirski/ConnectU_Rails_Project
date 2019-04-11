@@ -1,0 +1,112 @@
+<div class="col-sm-12">
+  <% @flat.flat_photos.each do |photo| %>
+    <%= cl_image_tag photo.photo, height: 300, crop: :fill %>
+  <% end %>
+</div>
+
+<div class="container flat-container">
+  <div class="row">
+    <div class="col-sm-8 flat-info">
+      <h1><%= @flat.name %></h1>
+      <hr>
+      <p><%= @flat.description %></p>
+    </div>
+    <div class="col-sm-4">
+      <div class="edit-flat">
+        <% if @flat.user == current_user %>
+          <%= link_to "Edit Flat", edit_flat_path(@flat), class: 'btn btn-primary' %>
+          <%= link_to "Delete Flat", flat_path(@flat), class: 'btn btn-danger', data: { confirm: 'Are you sure?' }, method: :delete %>
+        <% end %>
+      </div>
+      <hr>
+      <div class="add-to-favourites">     
+        <% if @favourites.include?(@flat) %>
+          <i class="fas fa-check"></i>
+          <h5>Added to Favourites</h5>
+        <% else %>
+          <%= link_to flat_favourites_path(@flat), method: :post do %>
+            <i class="fas fa-heart"></i>
+            <h5>Add to Favourites</h5>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="flat-hosted-by">
+        <%= link_to profile_path(@flat.user) do %>
+          <h5><%= cl_image_tag @flat.user.profile_picture, height: 60, crop: :fill, style: 'border-radius:50px;' %> Hosted By <%= @flat.user.first_name %></h5>
+        <% end %>
+      </div>
+      <div class="flat-book">
+        <h2>Amount Per Day: <%= humanized_money_with_symbol(@flat.price) %></h2>
+        <hr>
+        <%= form_tag orders_path do %>
+          <%= simple_fields_for :orders do |p| %>
+            <%= p.input :flat_booked_start_date, as: :date, html5: true, label: 'Check In' %>
+            <%= p.input :flat_booked_end_date, as: :date, html5: true, label: 'Check Out'   %>
+            <%= p.input :number_of_guests, as: :integer%>
+          <% end %>
+          <%= hidden_field_tag 'flat_id', @flat.id %>
+          <%= submit_tag 'Book', class: 'btn btn-primary' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-sm-12 flat-amenities">
+      <h3>Amenities</h3>
+      <hr>
+      <% if @flat.user == current_user %>
+        <%= link_to "Add Amenity", new_flat_amenity_path(@flat) %>
+        <hr>
+      <% end %>
+      <% if @flat.amenities.blank? %>
+        <h4>No Amenities Added Yet</h4>
+      <% else %>
+        <div class="row">
+          <% @flat.amenities.each do |amenity| %>
+            <div class="col-sm-3 amenity-card-container">
+              <div class="amenity-card" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 40%), url('https://source.unsplash.com/1600x900/?<%= amenity.name %>');">
+                <div class="amenity-card-content">
+                  <h5><%= pluralize amenity.quantity.to_i, amenity.name %></h5>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class=" col-sm-12 flat-location">
+      <h3>Location</h3>
+      <hr>
+      <div
+        id="map"
+        class="show-map"
+        data-markers="<%= @markers.to_json %>"
+        data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
+      ></div>
+    </div>
+
+
+    <div class="col-sm-8 flat-reviews">
+      <hr>
+      <h2><%= pluralize @flat.reviews.size, "review" %></h2>
+
+      <div id="reviews">
+        <% if @flat.reviews.blank? %>
+          Be the first to leave a review for <%= @flat.name %>
+        <% else %>
+          <% @flat.reviews.each do |review| %>
+            <%= render 'reviews/show', review: review %>
+          <% end %>
+        <% end %>
+      </div>
+      <%= render 'reviews/flat_form', flat: @flat, review: @review %>
+    </div>
+  </div>
+</div>
+
+
+
+

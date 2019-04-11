@@ -1,0 +1,12 @@
+<div class="col-sm-8 offset-sm-2 searchbar">
+  <%= form_tag profiles_path, method: :get, class: 'form-inline' do %>
+    <%= text_field_tag :first_name, params[:first_name], placeholder: 'First Name' %>
+    <%= text_field_tag :last_name, params[:last_name], placeholder: 'Last Name' %>
+    <%= submit_tag "Search", class: "btn btn-primary" %>
+  <% end %>
+</div>
+
+
+<div class="container">
+  <%= render 'components/profile_card' %>
+</div>

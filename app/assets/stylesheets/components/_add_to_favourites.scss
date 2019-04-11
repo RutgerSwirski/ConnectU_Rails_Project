@@ -1,0 +1,16 @@
+.add-to-favourites {
+	margin: 40px;
+	text-align: center;
+	transition: all 0.8s;
+	i {
+		font-size: 40px;
+	}
+	a {
+		text-decoration: none;
+		color: black;
+	}
+	&:hover {
+		transition: all 0.8s;
+		transform: scale(1.2);
+	}
+}

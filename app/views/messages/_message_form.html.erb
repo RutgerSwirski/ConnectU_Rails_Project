@@ -1,0 +1,6 @@
+<%= simple_form_for message, url: profile_messages_path(user) do |form| %>
+<%= form.input :content %>
+<%= form.button :submit %>
+<% end %>
+
+<!-- remote: true -->

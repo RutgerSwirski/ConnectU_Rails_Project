@@ -1,0 +1,104 @@
+<div class="col-sm-12">
+  <% @trip.trip_photos.each do |photo| %>
+    <%= cl_image_tag photo.photo, height: 300, crop: :fill %>
+  <% end %>
+</div>
+
+<div class="container trip-container">
+  <div class="row">
+
+    <div class="col-sm-8 trip-info">
+      <h1><%= @trip.name %></h1>
+      <hr>
+      <h2><%= @trip.destination %> <small>departing from <%= @trip.departing_from %></small> </h2>
+      <h4><%= @trip.date_arriving.strftime("%d-%m-%y") %> - <%= @trip.date_leaving.strftime("%d-%m-%y") %></h4>
+      <hr>
+      <p><%= @trip.description %></p>
+    </div>
+
+    <div class="col-sm-4">
+      <div class="edit-trip">
+        <% if @trip.user == current_user %>
+          <%= link_to "Edit Trip", edit_trip_path(@trip), class: 'btn btn-primary' %>
+          <%= link_to "Delete Trip", trip_path(@trip), class: 'btn btn-danger', data: { confirm: 'Are you sure?' }, method: :delete %>
+        <% end %>
+      </div>
+      <div class="add-to-favourites">
+        <%= link_to trip_favourites_path(@trip), method: :post do %>
+          <i class="fas fa-heart"></i>
+          <h5>Add to Favourites</h5>
+        <% end %>
+      </div>
+      <div class="trip-hosted-by">
+        <%= link_to profile_path(@trip.user) do %>
+          <h5><%= cl_image_tag @trip.user.profile_picture, height: 60, crop: :fill, style: 'border-radius:50px;' %> Hosted By <%= @trip.user.first_name %></h5>
+        <% end %>
+      </div>
+      <div class="trip-pledge-info">
+        <div class="c100 p<%= (((@trip.current_funding_amount).to_f / (@trip.funding_total).to_f) * 100).round %> center">
+          <span><%= (((@trip.current_funding_amount).to_f / (@trip.funding_total).to_f) * 100).round %>%</span>
+            <div class="slice">
+                <div class="bar"></div>
+                <div class="fill"></div>
+            </div>
+        </div>
+        <br>
+        <h4>Total Amount Needed: <%= humanized_money_with_symbol(@trip.funding_total) %></h4>
+        <hr>
+        <h4>Current Amount: <%= humanized_money_with_symbol(@trip.current_funding_amount) %></h4>
+        <hr>
+        <h5>Total Tickets: <%= @trip.ticket_quantity %></h5>
+        <hr>
+        <h5>Available Tickets: <%= @trip.available_tickets %></h5>
+      </div>
+      <div class="trip-pledge">
+        <h3><%= @trip.ticket_name %></h3>
+        <p><%= @trip.ticket_description %></p>
+        <h4><%= humanized_money_with_symbol(@trip.ticket_price) %></h4>
+        <% if @trip.available_tickets > 0 %>
+          <%= form_tag orders_path do %>
+            <%= simple_fields_for :orders do |p| %>
+              <%= p.input :number_of_orders, as: :integer, label: 'Quantity:'   %>
+            <% end %>
+            <%= hidden_field_tag 'trip_id', @trip.id %>
+            <%= submit_tag 'Pledge', class: 'btn btn-primary' %>
+          <% end %>
+        <% else %>
+          <h3>Sold Out!</h3>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-8 offset-sm-2 trip-reviews">
+    <h2><%= pluralize @trip.reviews.size, "review" %></h2>
+
+    <div id="reviews">
+      <% if @trip.reviews.blank? %>
+        Be the first to leave a review for <%= @trip.name %>
+      <% else %>
+        <% @trip.reviews.each do |review| %>
+          <%= render 'reviews/show', review: review %>
+        <% end %>
+      <% end %>
+    </div>
+    <%= render 'reviews/trip_form', trip: @trip, review: @review %>
+  </div>
+
+  <h2>Some Activities in <%= @trip.destination %> at this time</h2>
+  <hr>
+  <%= link_to "Add Activity", new_activity_path %>
+  <hr>
+  <%= render 'components/activity_card' %>
+
+  <hr>
+  <h2>Some Homes in <%= @trip.destination %></h2>
+  <hr>
+  <%= link_to "Add Home", new_flat_path %>
+  <hr>
+  <%= render 'components/flat_card' %>
+</div>
+
+
+
+

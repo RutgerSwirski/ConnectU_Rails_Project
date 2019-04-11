@@ -1,0 +1,27 @@
+<div class="container payment-container">
+  <div class="row">
+    <div class="col-sm-5 payment-image" style="background-image: url('<%= @order.activity.activity_photos.first.photo %>');">
+    </div>
+    <div class="col-sm-7 payment-info">
+      <h1><%= @order.activity.name %></h1>
+      <hr>
+      <h4><%= @order.activity.date.strftime("%d-%m-%y") %></h4>
+      <p><%= @order.activity.description %></p>
+      <hr>
+      <h5>Number Of Tickets: <%= @order.number_of_orders %></h5>
+      <hr>
+      <h3>Amount: <%= humanized_money_with_symbol(@order.number_of_orders * @order.amount) %></h3>
+      <%= form_tag order_payments_path(@order) do %>
+        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+          data-name="<%= @order.activity.name %>"
+          data-email="<%= current_user.email %>"
+          data-description="<%= @order.activity.description %>"
+          data-amount="<%= (@order.number_of_orders * @order.amount_cents) %>"
+          data-currency="<%= @order.amount.currency %>">
+        </script>
+      <% end %>
+    </div>
+  </div>
+</div>
+

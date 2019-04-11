@@ -1,0 +1,9 @@
+<div class="container">
+<h3>New Amenity for <%= @flat.name %></h3>
+  <%= simple_form_for [@flat, @amenity] do |f| %>
+    <%= f.input :name, as: :select, collection: ['Swimming Pool', 'BBQ', 'Bedroom', 'Bathroom', 'Garage'] %>
+    <%= f.input :quantity %>
+    <%= f.button :submit %>
+  <% end %>
+</div>
+

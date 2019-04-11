@@ -1,0 +1,6 @@
+<%= simple_form_for([trip, review], remote: true) do |form| %>
+  <%= form.input :rating %>
+  <%= form.input :review_content %>
+  <%= form.button :submit %>
+<% end %>
+

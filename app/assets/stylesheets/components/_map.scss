@@ -1,0 +1,14 @@
+#map {
+  width: 100%;
+  border-radius:10px;
+}
+.index-map {
+  position: sticky;
+  top: 0;
+  height: calc(100vh - 70px);
+}
+
+.show-map {
+  height:600px;
+  margin-top: 20px;
+}

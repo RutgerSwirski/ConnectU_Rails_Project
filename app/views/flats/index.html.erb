@@ -1,0 +1,32 @@
+<div class="col-sm-8 offset-sm-2 searchbar">
+  <%= form_tag flats_path, method: :get, class: 'form-inline' do %>
+    <%= text_field_tag :name, params[:name], placeholder: 'Name' %>
+    <%= text_field_tag :address, params[:address], placeholder: 'Address'  %>
+    <%= select_tag :price, options_for_select(["Sort Price", "Price ASC", "Price DESC"], params[:price]) %>
+    <%= submit_tag "Search", class: "btn btn-primary" %>
+  <% end %>
+</div>
+
+<div class="col-sm-12 flat-index-container">
+  <div class="row">
+    <div class="col-sm-6">
+      <% if @flats.blank? %>
+        <h3>Nothing Found!</h3>
+      <% else %>
+        <div class="row">
+          <%= render 'components/flat_card_index' %> 
+        </div>
+      <% end %>
+    </div>
+    <div class="col-sm-6">
+      <div
+        id="map"
+        class="index-map"
+        data-markers="<%= @markers.to_json %>"
+        data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
+      ></div>
+    </div>
+  </div>
+</div>
+
+

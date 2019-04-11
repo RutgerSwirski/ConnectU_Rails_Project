@@ -1,0 +1,27 @@
+<div class="container">
+<h3>Edit <%= @trip.name %></h3>
+  <% @trip.trip_photos.where.not(id: nil).each do |photo| %>
+    <li data-trip_photo-id="<%= photo.id %>" style="list-style: none">
+      <%= cl_image_tag photo.photo, height: 100, crop: :fill %>
+      <%= link_to "Delete Image", trip_photo_path(photo), method: :delete, remote: true  %>
+    </li>
+  <% end %>
+  <%= simple_form_for @trip do |f| %>
+    <%= f.simple_fields_for :trip_photos do |p| %>
+      <%= p.input :photo, label: "Images", as: :file, input_html: { multiple: true } %>
+      <%= p.input :photo_cache, as: :hidden %>
+    <% end %>
+    <%= f.input :name %>
+    <%= f.input :destination, input_html: { id: 'address_input' }  %>
+    <%= f.input :departing_from %>
+    <%= f.input :description %>
+    <%= f.input :date_arriving, html5: true %>
+    <%= f.input :date_leaving, html5: true  %>
+    <hr>
+    <h2>Trip Ticket:</h2>
+    <%= f.input :ticket_name %>
+    <%= f.input :ticket_description %>
+
+    <%= f.button :submit %>
+  <% end %>
+</div>

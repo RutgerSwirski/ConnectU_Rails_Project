@@ -1,0 +1,23 @@
+.searchbar {
+  padding: 20px;
+}
+
+.searchbar input[type="text"] {
+  padding: 5px;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 10px;
+}
+
+.searchbar input[type="submit"] {
+  width: 180px;
+  margin: 10px;
+  padding: 5px;
+}
+
+.searchbar select {
+  padding: 5px;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 10px;
+}

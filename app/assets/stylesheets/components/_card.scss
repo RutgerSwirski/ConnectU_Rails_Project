@@ -1,0 +1,56 @@
+.default-card {
+  position: relative;
+  padding: 5px;
+  transition: all 1s;
+  a {
+    text-decoration: none;
+    color: black;
+  }
+  &:hover {
+    transition: all 1s;
+    opacity: 0.7;
+  }
+}
+
+.default-card-image {
+  height: 200px;
+  background-size: cover;
+  border-radius: 10px;
+  position: relative;
+}
+
+.default-card-content {
+  padding: 10px;
+  h3 {
+    font-weight: bold;
+  }
+}
+
+.trip-percent {
+  position: absolute;
+  right:0;
+  padding: 15px 10px;
+}
+
+.ending-soon {
+  background-color: white;
+  width: 50%;
+  position: absolute;
+  top:30px;
+  text-align: center;
+  padding: 10px 0 0 0;
+}
+
+.activity-ended {
+  background-color: white;
+  width: 55%;
+  position: absolute;
+  top:30px;
+  text-align: center;
+  padding: 10px 5px 0 5px;
+}
+
+.card-tickets {
+  font-weight: bold;
+  padding: 5px;
+}

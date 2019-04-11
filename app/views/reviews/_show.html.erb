@@ -1,0 +1,23 @@
+<hr>
+<div class="row">
+  <div class="col-sm-6 review-user">
+    <%= link_to profile_path(review.user) do %>
+      <%= cl_image_tag review.user.profile_picture, height: 60, crop: :fill, style: 'border-radius:50px;' %>
+      <p>
+        <%= review.user.first_name %>
+        <br>
+        <%= review.created_at.strftime("%d-%m-%y") %>
+      </p>
+    <% end %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12 review-content">
+    <% review.rating.to_i.times do %>
+      <i class="fas fa-star"></i>
+    <% end %>
+    <br style="margin-bottom: 10px;">
+    <p><%= review.review_content %></p>
+  </div>
+</div>
+<hr>
