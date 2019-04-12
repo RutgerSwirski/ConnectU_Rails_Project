@@ -33,8 +33,10 @@ class ActivitiesController < ApplicationController
     @activity_creator = User.find(@activity.user_id)
     @review = Review.new
 
-    @favourites = current_user.favourites.map { |favourite| favourite.activity } 
-
+    if user_signed_in?
+      @favourites = current_user.favourites.map { |favourite| favourite.activity } 
+    end
+    
     @activity_lat_long = Activity.where(id: params[:id])
     @markers = @activity_lat_long.map do |activity|
       {
