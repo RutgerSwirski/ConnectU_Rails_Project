@@ -31,7 +31,9 @@ class FlatsController < ApplicationController
   def show
     @review = Review.new
 
-    @favourites = current_user.favourites.map { |favourite| favourite.flat } 
+    if user_signed_in?
+      @favourites = current_user.favourites.map { |favourite| favourite.flat }
+    end 
 
     @flat_lat_long = Flat.where(id: params[:id])
     @markers = @flat_lat_long.map do |flat|

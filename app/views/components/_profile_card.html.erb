@@ -6,20 +6,16 @@
           <div class="profile-card-image" style="background-image: url('<%= user.profile_picture %>');">
           </div>
           <div class="profile-card-content">
-            <h3><%= user.first_name %> <%= user.last_name %></h3>
+            <h4><%= user.first_name %> <%= user.last_name %></h4>
             <hr>
-            <h5>Hosted</h5>
-            <ul>
-              <li><i class="fas fa-home"></i> <%= user.flats.count %></li>
-              <li><i class="fas fa-plane"></i> <%= user.trips.count %></li>
-              <li><i class="fas fa-snowboarding"></i> <%= user.activities.count %></li>
-            </ul>
+            <p><%= user.description[0..100] %>...</p>
+            <hr>
+          </div>
+          <div class="friend-status">
+            <%= render 'friends/add_friend', user: user %>
           </div>
         </div>
       <% end %>
-      <div class="friend-status">
-        <%= render 'friends/add_friend', user: user %>
-      </div>
     </div>
   <% end %>
 </div>

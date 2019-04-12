@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2019_04_09_132840) do
   end
 
   create_table "activity_photos", force: :cascade do |t|
-    t.string "photo"
+    t.string "photo", default: "jgzmvpaumlt326d8fcal.jpg"
     t.bigint "activity_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 2019_04_09_132840) do
   end
 
   create_table "flat_photos", force: :cascade do |t|
-    t.string "photo"
+    t.string "photo", default: "l7i9qo6gxliuk2s4hazi.jpg"
     t.bigint "flat_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -147,7 +147,7 @@ ActiveRecord::Schema.define(version: 2019_04_09_132840) do
   end
 
   create_table "trip_photos", force: :cascade do |t|
-    t.string "photo"
+    t.string "photo", default: "eu7793sw3rerfbltachi.jpg"
     t.bigint "trip_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

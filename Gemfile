@@ -9,6 +9,8 @@ gem 'puma'
 gem 'rails', '5.2.2'
 gem 'redis'
 
+gem 'faker', '~> 1.6', '>= 1.6.6'
+
 gem 'money-rails'
 gem 'stripe'
 gem 'dotenv-rails', groups: [:development, :test]
