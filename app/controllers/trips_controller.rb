@@ -44,7 +44,6 @@ class TripsController < ApplicationController
     @trip = Trip.new(trip_params)
     @trip.user = current_user
     @trip.ticket_price = (@trip.funding_total / @trip.ticket_quantity).to_f
-    # raise
     if @trip.save
       if params[:trip][:trip_photos]['photo'] != nil
         params[:trip][:trip_photos]['photo'].each do |a|
