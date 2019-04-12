@@ -23,10 +23,17 @@
           <%= link_to "Delete Trip", trip_path(@trip), class: 'btn btn-danger', data: { confirm: 'Are you sure?' }, method: :delete %>
         <% end %>
       </div>
-      <div class="add-to-favourites">
-        <%= link_to trip_favourites_path(@trip), method: :post do %>
-          <i class="fas fa-heart"></i>
-          <h5>Add to Favourites</h5>
+      <div class="add-to-favourites">  
+        <% if user_signed_in? %>   
+          <% if @favourites.include?(@flat) %>
+            <i class="fas fa-check"></i>
+            <h5>Added to Favourites</h5>
+          <% else %>
+            <%= link_to trip_favourites_path(@trip), method: :post do %>
+            <i class="fas fa-heart"></i>
+            <h5>Add to Favourites</h5>
+          <% end %>
+          <% end %>
         <% end %>
       </div>
       <div class="trip-hosted-by">

@@ -33,6 +33,9 @@ class TripsController < ApplicationController
     @activities = Activity.near(@trip.destination, 10).where(date: @trip.date_arriving..@trip.date_leaving)
     @flats = Flat.near(@trip.destination, 20)
     @review = Review.new
+    if user_signed_in?
+      @favourites = current_user.favourites.map { |favourite| favourite.trip }
+    end 
   end
 
   def new
