@@ -3,6 +3,19 @@
     <div class="col-sm-4 default-card">
       <%= link_to activity_path(activity) do %>
         <div class="default-card-image" style="background-image: url('<%= activity.activity_photos.first.photo %>');">
+        <% if activity.date == Date.tomorrow %>
+          <div class="ending-soon">
+            <h4>Ending Soon!</h4>
+          </div>
+        <% elsif activity.date == Date.today %>
+          <div class="ending-soon">
+           <h4>Ending Today!</h4>
+          </div>
+        <% elsif activity.date < Date.today %>
+          <div class="activity-ended">
+            <h4>Activity Ended!</h4>
+          </div>
+        <% end %>
         </div>
         <div class="default-card-content">
           <h3><%= activity.name %></h3>

@@ -3,6 +3,19 @@
     <div class="col-sm-4 default-card">
       <%= link_to trip_path(trip) do %>
         <div class="default-card-image" style="background-image: url('<%= trip.trip_photos.first.photo %>');">
+          <% if trip.date_leaving == Date.tomorrow %>
+            <div class="ending-soon">
+              <h4>Ending Soon!</h4>
+            </div>
+          <% elsif trip.date_leaving == Date.today %>
+            <div class="ending-soon">
+             <h4>Ending Today!</h4>
+            </div>
+          <% elsif trip.date_leaving < Date.today %>
+            <div class="activity-ended">
+              <h4>Activity Ended!</h4>
+            </div>
+          <% end %>
           <div class="trip-percent">
             <div class="c100 p<%= (((trip.current_funding_amount).to_f / (trip.funding_total).to_f) * 100).round %> small">
               <span><%= (((trip.current_funding_amount).to_f / (trip.funding_total).to_f) * 100).round %>%</span>

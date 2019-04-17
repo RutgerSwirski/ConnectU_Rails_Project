@@ -25,7 +25,7 @@
       </div>
       <div class="add-to-favourites">  
         <% if user_signed_in? %>   
-          <% if @favourites.include?(@flat) %>
+          <% if @favourites.include?(@trip) %>
             <i class="fas fa-check"></i>
             <h5>Added to Favourites</h5>
           <% else %>
@@ -59,19 +59,23 @@
         <h5>Available Tickets: <%= @trip.available_tickets %></h5>
       </div>
       <div class="trip-pledge">
-        <h3><%= @trip.ticket_name %></h3>
-        <p><%= @trip.ticket_description %></p>
-        <h4><%= humanized_money_with_symbol(@trip.ticket_price) %></h4>
-        <% if @trip.available_tickets > 0 %>
-          <%= form_tag orders_path do %>
-            <%= simple_fields_for :orders do |p| %>
-              <%= p.input :number_of_orders, as: :integer, label: 'Quantity:'   %>
-            <% end %>
-            <%= hidden_field_tag 'trip_id', @trip.id %>
-            <%= submit_tag 'Pledge', class: 'btn btn-primary' %>
-          <% end %>
+        <% if @trip.date_leaving < Date.today %>
+          <h3>Trip Ended!</h3>
         <% else %>
-          <h3>Sold Out!</h3>
+          <h3><%= @trip.ticket_name %></h3>
+          <p><%= @trip.ticket_description %></p>
+          <h4><%= humanized_money_with_symbol(@trip.ticket_price) %></h4>
+          <% if @trip.available_tickets > 0 %>
+            <%= form_tag orders_path do %>
+              <%= simple_fields_for :orders do |p| %>
+                <%= p.input :number_of_orders, as: :integer, label: 'Quantity:'   %>
+              <% end %>
+              <%= hidden_field_tag 'trip_id', @trip.id %>
+              <%= submit_tag 'Pledge', class: 'btn btn-primary' %>
+            <% end %>
+          <% else %>
+            <h3>Sold Out!</h3>
+          <% end %>
         <% end %>
       </div>
     </div>
