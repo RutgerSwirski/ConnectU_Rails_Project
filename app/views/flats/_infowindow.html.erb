@@ -1,1 +1,14 @@
-<h1>Hello There</h1>
+<div class="container">
+	<div class="row">
+		<div class="info-window-content">
+			<%= cl_image_tag flat.flat_photos.first.photo, height: 80, crop: :fill %>
+			<h5><%= flat.name %></h5>
+			<p>
+				<%= flat.address %>
+				<br>
+				Amount Per Day: <%= humanized_money_with_symbol(flat.price) %>
+			</p>
+			<%= link_to "View", flat_path(flat), class: 'btn btn-outline-dark'  %>
+		</div>
+	</div>
+</div>

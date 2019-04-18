@@ -1,0 +1,14 @@
+<div class="container">
+	<div class="row">
+		<div class="info-window-content">
+			<%= cl_image_tag trip.trip_photos.first.photo, height: 80, crop: :fill %>
+			<h5><%= trip.name %></h5>
+			<p>
+				<%= trip.destination %>
+				<br>
+				Price: <%= humanized_money_with_symbol(trip.ticket_price) %>
+			</p>
+			<%= link_to "View", trip_path(trip), class: 'btn btn-outline-dark'  %>
+		</div>
+	</div>
+</div>
