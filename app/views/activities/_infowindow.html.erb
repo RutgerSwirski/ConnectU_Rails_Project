@@ -1,0 +1,14 @@
+<div class="container">
+	<div class="row">
+		<div class="info-window-content">
+			<%= cl_image_tag activity.activity_photos.first.photo, height: 80, crop: :fill %>
+			<h5><%= activity.name %></h5>
+			<p>
+				<%= activity.date.strftime("%d-%m-%y") %> | <%= activity.address %>
+				<br>
+				Price: <%= humanized_money_with_symbol(activity.price) %>
+			</p>
+			<%= link_to "View", activity_path(activity), class: 'btn btn-outline-dark'  %>
+		</div>
+	</div>
+</div>

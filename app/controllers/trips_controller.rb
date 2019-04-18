@@ -23,7 +23,8 @@ class TripsController < ApplicationController
     @markers = @trips.map do |trip|
       {
         lat: trip.latitude,
-        lng: trip.longitude
+        lng: trip.longitude,
+        infoWindow: render_to_string(partial: "infowindow", locals: { trip: trip })
       }
     end
   end
